@@ -7,8 +7,10 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import br.com.aeloy.ontimeshare.BuildConfig;
+import br.com.aeloy.ontimeshare.db.ddl.constraint.Constraints;
 
 import static br.com.aeloy.ontimeshare.db.ddl.constraint.Constraints.primaryKey;
+import static br.com.aeloy.ontimeshare.db.ddl.constraint.Constraints.references;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -31,5 +33,22 @@ public class CreateTableScriptTest {
         Assert.assertEquals(createTable, generatedCreateTable);
     }
 
+    @Test
+    public void shouldCreateScriptForCreateTableWithForeignKeyConstraint() {
+        String timeEntryTable = "time_entry";
+        String commentTable = "comment_table";
+
+        String result = new CreateTable(timeEntryTable)
+                .addColumn("id").withConstraints(primaryKey()).ofType("integer")
+                .and()
+                .addColumn("comment_id").withConstraints(references("id").fromTable(commentTable))
+                .ofType("integer")
+                .build();
+
+        String expected =
+                "CREATE TABLE time_entry (id integer PRIMARY KEY, comment_id integer REFERENCES comment_table(id))";
+
+        Assert.assertEquals(expected, result);
+    }
 }
 
