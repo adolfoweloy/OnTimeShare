@@ -11,7 +11,7 @@ import br.com.aeloy.ontimeshare.db.ddl.CreateTable;
 /**
  * Created by hastronauta on 1/2/16.
  */
-class CreateTableBuilder {
+public class CreateTableBuilder {
     private CreateTable createTableScript;
 
     CreateTableBuilder(CreateTable createTableScript) {
