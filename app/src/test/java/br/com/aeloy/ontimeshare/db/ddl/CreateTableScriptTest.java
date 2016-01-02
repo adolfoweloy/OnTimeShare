@@ -15,7 +15,7 @@ import static br.com.aeloy.ontimeshare.db.ddl.constraint.Constraints.primaryKey;
 public class CreateTableScriptTest {
 
     @Test
-    public void testShouldCreateAValidDDLScriptForTableCreation() {
+    public void shouldCreateAValidDDLScriptForTableCreation() {
         String tableName = "time_entry";
 
         String generatedCreateTable = new CreateTable(tableName)

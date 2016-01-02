@@ -5,26 +5,23 @@ import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.aeloy.ontimeshare.db.ddl.ColumnDefinition;
-import br.com.aeloy.ontimeshare.db.ddl.CreateTable;
-
 /**
  * Created by hastronauta on 1/2/16.
  */
 public class CreateTableBuilder {
-    private CreateTable createTableScript;
+    private CreateTable createTable;
 
-    CreateTableBuilder(CreateTable createTableScript) {
-        this.createTableScript = createTableScript;
+    CreateTableBuilder(CreateTable createTable) {
+        this.createTable = createTable;
     }
 
     public String build() {
         StringBuilder sb = new StringBuilder("CREATE TABLE ");
-        sb.append(createTableScript.getTableName());
+        sb.append(createTable.getTableName());
         sb.append(" (");
 
         List<String> columnDefinitions = new ArrayList<>();
-        for (ColumnDefinition column : createTableScript.getColumns()) {
+        for (ColumnDefinition column : createTable.getColumns()) {
             columnDefinitions.add(column.createColumnDefinition());
         }
 
@@ -35,7 +32,7 @@ public class CreateTableBuilder {
     }
 
     public CreateTable and() {
-        return createTableScript;
+        return createTable;
     }
 
 

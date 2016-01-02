@@ -21,11 +21,11 @@ public class CreateTable {
         return column;
     }
 
-    public String getTableName() {
+    String getTableName() {
         return tableName;
     }
 
-    public List<ColumnDefinition> getColumns() {
+    List<ColumnDefinition> getColumns() {
         return Collections.unmodifiableList(columns);
     }
 }
