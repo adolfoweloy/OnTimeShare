@@ -10,6 +10,8 @@ import java.util.List;
 import br.com.aeloy.ontimeshare.db.ddl.CreateTable;
 import br.com.aeloy.ontimeshare.db.ddl.constraint.Constraints;
 
+import static br.com.aeloy.ontimeshare.db.TimeEntryContract.*;
+
 /**
  * Created by hastronauta on 1/1/16.
  */
@@ -46,35 +48,35 @@ public class ScriptDB extends SQLiteOpenHelper {
     }
 
     private String getTimeEntrySQLDefinition() {
-        return new CreateTable(TimeEntryContract.TimeEntry.TABLE_NAME)
+        return new CreateTable(TimeEntry.TABLE_NAME)
 
-            .addColumn(TimeEntryContract.TimeEntry.COLUMN_NAME_TIME_ENTRY_ID)
+            .addColumn(TimeEntry._ID)
             .withConstraints(Constraints.primaryKey())
             .ofType("integer")
 
             .and()
-            .addColumn(TimeEntryContract.TimeEntry.COLUMN_NAME_DATE)
+            .addColumn(TimeEntry.COLUMN_NAME_DATE)
             .ofType("date")
 
             .and()
-            .addColumn(TimeEntryContract.TimeEntry.COLUMN_NAME_HOURS)
-            .ofType("integer")
+            .addColumn(TimeEntry.COLUMN_NAME_HOURS)
+            .ofType("TINYINT")
 
             .build();
     }
 
     private String getCommentSQLDefinition() {
-        return new CreateTable(TimeEntryContract.Comment.TABLE_NAME)
-            .addColumn(TimeEntryContract.Comment.COLUMN_NAME_COMMENT_ID)
+        return new CreateTable(Comment.TABLE_NAME)
+            .addColumn(Comment._ID)
             .withConstraints(Constraints.primaryKey())
             .ofType("integer")
 
             .and()
-            .addColumn(TimeEntryContract.Comment.COLUMN_NAME_TIME_ENTRY_ID)
+            .addColumn(Comment.COLUMN_NAME_TIME_ENTRY_ID)
             .ofType("integer")
 
             .and()
-            .addColumn(TimeEntryContract.Comment.COLUMN_NAME_CONTENT)
+            .addColumn(Comment.COLUMN_NAME_CONTENT)
             .ofType("integer")
 
             .build();
@@ -83,8 +85,8 @@ public class ScriptDB extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String[] sql = {
-                "DROP TABLE IF EXISTS " + TimeEntryContract.Comment.TABLE_NAME,
-                "DROP TABLE IF EXISTS " + TimeEntryContract.TimeEntry.TABLE_NAME
+                "DROP TABLE IF EXISTS " + Comment.TABLE_NAME,
+                "DROP TABLE IF EXISTS " + TimeEntry.TABLE_NAME
         };
 
         for (String s : sql) {
