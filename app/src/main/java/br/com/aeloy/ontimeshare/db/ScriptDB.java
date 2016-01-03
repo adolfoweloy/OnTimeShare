@@ -18,8 +18,18 @@ public class ScriptDB extends SQLiteOpenHelper {
     private static final String DB_NAME = "on_time_share.db";
     private static final int DB_VERSION = 1;
 
+    private SQLiteDatabase database;
+
     public ScriptDB(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+    }
+
+    public SQLiteDatabase getDb() {
+        if (database == null) {
+            database = getWritableDatabase();
+        }
+
+        return database;
     }
 
     @Override
@@ -43,7 +53,7 @@ public class ScriptDB extends SQLiteOpenHelper {
             .ofType("integer")
 
             .and()
-            .addColumn(TimeEntryContract.TimeEntry.COLUMN_NAME_HOURS)
+            .addColumn(TimeEntryContract.TimeEntry.COLUMN_NAME_DATE)
             .ofType("date")
 
             .and()
