@@ -1,10 +1,14 @@
 package br.com.aeloy.ontimeshare;
 
+import android.database.DataSetObserver;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -12,8 +16,10 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        Spinner months = (Spinner) findViewById(R.id.months);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
